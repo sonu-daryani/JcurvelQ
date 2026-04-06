@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    background-color: #f3f3f6;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    background-color: #050508;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.2);
+    color: inherit;
+  }
+
+  html.dark ::selection {
+    background-color: rgba(139, 92, 246, 0.35);
+    color: #fafafa;
+  }
+}
+
+/* Dual-theme agent console canvas */
+.agent-shell {
+  min-height: 100dvh;
+  color: #18181b;
+  background-color: #f3f3f6;
+  background-image:
+    radial-gradient(ellipse 130% 80% at 50% -35%, rgba(139, 92, 246, 0.14), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 100% 0%, rgba(34, 211, 238, 0.1), transparent 50%),
+    linear-gradient(rgba(24, 24, 27, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24, 24, 27, 0.04) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    44px 44px,
+    44px 44px;
+}
+
+.dark .agent-shell {
+  color: #fafafa;
+  background-color: #050508;
+  background-image:
+    radial-gradient(ellipse 110% 75% at 50% -28%, rgba(109, 40, 217, 0.32), transparent 54%),
+    radial-gradient(ellipse 55% 38% at 100% 0%, rgba(34, 211, 238, 0.16), transparent 48%),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    44px 44px,
+    44px 44px;
+}
+
+.agent-header-glass {
+  border-bottom: 1px solid rgba(24, 24, 27, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.dark .agent-header-glass {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+  background: rgba(9, 9, 11, 0.75);
+}
+
+/* Gradient frame → inner card (both themes) */
+.agent-frame {
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.35),
+    rgba(34, 211, 238, 0.22) 45%,
+    rgba(139, 92, 246, 0.2)
+  );
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
+    0 12px 40px -20px rgba(109, 40, 217, 0.2);
+}
+
+.dark .agent-frame {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.45),
+    rgba(34, 211, 238, 0.18) 40%,
+    rgba(91, 33, 182, 0.35)
+  );
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 20px 50px -24px rgba(0, 0, 0, 0.6);
+}
+
+.agent-frame-inner {
+  border-radius: calc(1rem - 1px);
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+}
+
+.dark .agent-frame-inner {
+  background: rgb(24 24 27 / 0.94);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+}
