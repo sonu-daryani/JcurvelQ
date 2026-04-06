@@ -13,7 +13,7 @@ export function ThemeToggle({
     <button
       type="button"
       onClick={() => onChange(isDark ? 'light' : 'dark')}
-      className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200/90 bg-white/80 text-zinc-700 shadow-sm ring-violet-500/0 transition hover:ring-2 hover:ring-violet-500/15 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:ring-violet-400/20"
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-zinc-200/90 bg-white/80 text-zinc-700 shadow-sm ring-violet-500/0 transition hover:ring-2 hover:ring-violet-500/15 sm:h-10 sm:w-10 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:ring-violet-400/20"
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       title={isDark ? 'Light theme' : 'Dark theme'}
     >

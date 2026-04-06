@@ -44,24 +44,24 @@ export function TaskCard({ task, tasks }: { task: TaskModel; tasks: Record<strin
 
   return (
     <article
-      className={`rounded-xl border border-zinc-200/90 border-l-[3px] bg-white/95 p-3 shadow-sm ring-1 ring-black/[0.02] dark:border-zinc-800 dark:bg-zinc-900/90 dark:ring-white/[0.04] ${statusAccent(task.status)}`}
+      className={`min-w-0 rounded-xl border border-zinc-200/90 border-l-[3px] bg-white/95 p-3 shadow-sm ring-1 ring-black/[0.02] dark:border-zinc-800 dark:bg-zinc-900/90 dark:ring-white/[0.04] ${statusAccent(task.status)}`}
     >
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div className="min-w-0">
-          <h3 className="font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">{task.label}</h3>
-          <p className="mt-1 inline-flex rounded-md border border-violet-200/80 bg-violet-50/80 px-2 py-0.5 font-mono text-[11px] text-violet-800 dark:border-violet-900/50 dark:bg-violet-950/40 dark:text-violet-200">
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-3">
+        <div className="min-w-0 flex-1">
+          <h3 className="break-words font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">{task.label}</h3>
+          <p className="mt-1 inline-block max-w-full break-all rounded-md border border-violet-200/80 bg-violet-50/80 px-2 py-0.5 font-mono text-[11px] text-violet-800 dark:border-violet-900/50 dark:bg-violet-950/40 dark:text-violet-200">
             {task.agent}
           </p>
         </div>
         <span
-          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ring-1 ${statusPill(task.status)}`}
+          className={`w-fit shrink-0 self-start rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ring-1 sm:self-auto ${statusPill(task.status)}`}
         >
           {task.status}
         </span>
       </div>
 
       {task.depends_on.length > 0 ? (
-        <p className="mt-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 break-words text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
           <span className="font-semibold text-zinc-700 dark:text-zinc-300">Depends on </span>
           {task.depends_on.map((id, i) => (
             <span key={id}>
@@ -85,14 +85,14 @@ export function TaskCard({ task, tasks }: { task: TaskModel; tasks: Record<strin
         <div className="mt-2 rounded-lg border border-sky-200/90 bg-sky-50/90 px-2.5 py-2 text-sm text-sky-950 dark:border-sky-900/40 dark:bg-sky-950/30 dark:text-sky-50">
           <p className="text-[10px] font-bold uppercase tracking-wider text-sky-700 dark:text-sky-300">Cancelled</p>
           {task.cancel_reason ? <p className="mt-1 font-mono text-[11px] text-sky-800/90 dark:text-sky-200/80">{task.cancel_reason}</p> : null}
-          {task.cancel_message ? <p className="mt-1.5 leading-relaxed">{task.cancel_message}</p> : null}
+          {task.cancel_message ? <p className="mt-1.5 break-words leading-relaxed">{task.cancel_message}</p> : null}
         </div>
       ) : null}
 
       {task.status === 'failed' && task.error ? (
         <div className="mt-2 rounded-lg border border-rose-200/90 bg-rose-50/90 px-2.5 py-2 dark:border-rose-900/45 dark:bg-rose-950/35">
           <p className="text-[10px] font-bold uppercase tracking-wider text-rose-700 dark:text-rose-400">Failed</p>
-          <p className="mt-1 font-mono text-xs leading-relaxed text-rose-900 dark:text-rose-100">{task.error}</p>
+          <p className="mt-1 break-words font-mono text-xs leading-relaxed text-rose-900 dark:text-rose-100">{task.error}</p>
         </div>
       ) : null}
 
@@ -103,17 +103,17 @@ export function TaskCard({ task, tasks }: { task: TaskModel; tasks: Record<strin
             {task.toolCalls.map((c, i) => (
               <li
                 key={`${c.tool}-${c.timestamp}-${i}`}
-                className="rounded-lg border border-zinc-200/80 bg-zinc-50/90 p-2.5 font-mono text-[11px] leading-snug dark:border-zinc-700/80 dark:bg-black/35"
+                className="min-w-0 overflow-x-auto rounded-lg border border-zinc-200/80 bg-zinc-50/90 p-2.5 font-mono text-[11px] leading-snug dark:border-zinc-700/80 dark:bg-black/35"
               >
-                <div className="flex items-center gap-1.5 text-zinc-900 dark:text-zinc-100">
-                  <span className="select-none text-violet-500 dark:text-violet-400">›</span>
-                  <span className="font-semibold">{c.tool}</span>
+                <div className="flex min-w-0 items-center gap-1.5 text-zinc-900 dark:text-zinc-100">
+                  <span className="shrink-0 select-none text-violet-500 dark:text-violet-400">›</span>
+                  <span className="min-w-0 break-all font-semibold">{c.tool}</span>
                 </div>
-                <div className="mt-1 pl-4 text-zinc-600 dark:text-zinc-400">
+                <div className="mt-1 break-words pl-4 text-zinc-600 dark:text-zinc-400">
                   <span className="text-zinc-400 dark:text-zinc-500">in</span> {c.input_summary}
                 </div>
                 {c.output_summary ? (
-                  <div className="mt-1 pl-4 text-emerald-700 dark:text-emerald-300">
+                  <div className="mt-1 break-words pl-4 text-emerald-700 dark:text-emerald-300">
                     <span className="text-zinc-400 dark:text-zinc-500">out</span> {c.output_summary}
                   </div>
                 ) : (
@@ -132,7 +132,7 @@ export function TaskCard({ task, tasks }: { task: TaskModel; tasks: Record<strin
             {mid.map((o, i) => (
               <li
                 key={`${o.timestamp}-${i}`}
-                className="rounded-lg border border-dashed border-zinc-300/90 bg-zinc-50/50 px-2.5 py-2 text-sm leading-relaxed text-zinc-800 dark:border-zinc-600 dark:bg-zinc-950/40 dark:text-zinc-200"
+                className="break-words rounded-lg border border-dashed border-zinc-300/90 bg-zinc-50/50 px-2.5 py-2 text-sm leading-relaxed text-zinc-800 dark:border-zinc-600 dark:bg-zinc-950/40 dark:text-zinc-200"
               >
                 {o.content}
               </li>
@@ -148,7 +148,7 @@ export function TaskCard({ task, tasks }: { task: TaskModel; tasks: Record<strin
             {fin.map((o, i) => (
               <li
                 key={`f-${o.timestamp}-${i}`}
-                className="rounded-lg border border-emerald-200/90 bg-emerald-50/90 px-2.5 py-2 text-sm leading-relaxed text-emerald-950 dark:border-emerald-900/45 dark:bg-emerald-950/30 dark:text-emerald-50"
+                className="break-words rounded-lg border border-emerald-200/90 bg-emerald-50/90 px-2.5 py-2 text-sm leading-relaxed text-emerald-950 dark:border-emerald-900/45 dark:bg-emerald-950/30 dark:text-emerald-50"
               >
                 {o.content}
                 {o.quality_score != null ? (

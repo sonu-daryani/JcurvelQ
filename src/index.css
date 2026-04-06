@@ -26,6 +26,8 @@
 
   #root {
     min-height: 100dvh;
+    min-width: 0;
+    overflow-x: clip;
   }
 
   ::selection {
@@ -42,6 +44,10 @@
 /* Dual-theme agent console canvas */
 .agent-shell {
   min-height: 100dvh;
+  min-width: 0;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   color: #18181b;
   background-color: #f3f3f6;
   background-image:
@@ -76,6 +82,7 @@
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .dark .agent-header-glass {
